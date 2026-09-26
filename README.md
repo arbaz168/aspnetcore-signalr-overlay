@@ -68,6 +68,16 @@ Every change an overlay needs to see (follows, subscriptions, donations, goal ch
 - **Reconnect forever, with jitter.** An overlay has no one watching it. It retries with exponential backoff capped at 30 seconds and never gives up, apart from a `401`, which retrying cannot fix.
 - **Money in minor units.** Amounts are integers in the channel's currency, formatted with that currency's own decimals (JPY has none).
 
+## Why SignalR, not raw WebSockets
+
+The production overlays I run for [Sponsa](https://sponsa.app) use raw WebSockets: `UseWebSockets` and a small handler, one message shape, one process. That was the right size for that system. This demo uses SignalR on purpose, because it is what I would reach for when the feature grows:
+
+- **Groups, auth and hub methods are built in.** Per-channel groups, the token check on connect and the `Resume` call are a few lines each. With raw WebSockets I write the subscription registry, message framing and request/response matching myself.
+- **Transport fallback.** SignalR negotiates WebSockets and falls back to Server-Sent Events or long polling. The integration tests use long polling over the in-memory test server, so they run real clients without opening sockets.
+- **Scale-out is a configuration change.** A Redis backplane or Azure SignalR Service fans broadcasts out across instances. Raw WebSockets need that plumbing written by hand.
+
+The cost is a client library, a negotiate round trip and a protocol on top of the socket. The ordering guarantees do not depend on either choice: sequence numbers, resume and idempotency sit above the transport and would work unchanged over a plain WebSocket.
+
 ## Run it
 
 Requires the [.NET 10 SDK](https://dotnet.microsoft.com/download) and Node.js 22 or later. No Docker needed.
