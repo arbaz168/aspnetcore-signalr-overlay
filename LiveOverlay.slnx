@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/LiveOverlay.Api/LiveOverlay.Api.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/LiveOverlay.Tests/LiveOverlay.Tests.csproj" />
+  </Folder>
+</Solution>

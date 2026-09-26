@@ -1,0 +1,267 @@
+:root {
+  --bg: #f6f6f9;
+  --surface: #ffffff;
+  --border: #e3e3ea;
+  --text: #17171f;
+  --muted: #6b6b7b;
+  --accent: #6d4aff;
+  --accent-text: #ffffff;
+  --accent-2: #0ea5c6;
+  --error: #c62828;
+  --ok: #16a34a;
+  --warn: #d97706;
+  color-scheme: light;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: var(--text);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f0f15;
+    --surface: #181821;
+    --border: #2a2a36;
+    --text: #ececf3;
+    --muted: #9a9aad;
+    --accent: #8b70ff;
+    --accent-2: #22d3ee;
+    --error: #f87171;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+}
+
+.page {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 32px 16px 64px;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 28px;
+}
+
+.page-header p {
+  margin: 4px 0 24px;
+  color: var(--muted);
+}
+
+h2,
+h3 {
+  margin: 0 0 8px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px;
+  min-width: 0;
+}
+
+.card.narrow {
+  max-width: 440px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.span-2 {
+  grid-column: span 2;
+}
+
+@media (max-width: 720px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .span-2 {
+    grid-column: auto;
+  }
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.row.between {
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.row.wrap {
+  flex-wrap: wrap;
+}
+
+.grow {
+  flex: 1;
+  min-width: 0;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+input,
+select {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 11px;
+  font: inherit;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+button,
+.button {
+  padding: 9px 16px;
+  font: inherit;
+  font-weight: 600;
+  color: var(--accent-text);
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+button.secondary,
+.button.secondary {
+  color: var(--text);
+  background: transparent;
+  border-color: var(--border);
+}
+
+button.link {
+  padding: 0;
+  color: var(--muted);
+  background: none;
+  border: none;
+  font-weight: 400;
+  text-decoration: underline;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.error {
+  margin: 0;
+  color: var(--error);
+  font-size: 14px;
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 2px;
+  border-radius: 50%;
+  background: var(--warn);
+  vertical-align: middle;
+}
+
+.dot-connected {
+  background: var(--ok);
+}
+
+.dot-unauthorized {
+  background: var(--error);
+}
+
+.goal-preview {
+  margin-bottom: 16px;
+}
+
+.bar {
+  height: 10px;
+  margin-top: 8px;
+  background: var(--border);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.bar > div {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transition: width 600ms ease-out;
+}
+
+.feed {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.feed li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 0;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.feed li:first-child {
+  border-top: none;
+}
+
+.seq {
+  min-width: 40px;
+  font-variant-numeric: tabular-nums;
+  color: var(--muted);
+}
+
+.tag {
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 999px;
+  background: var(--border);
+}
+
+.tag-donation {
+  color: #fff;
+  background: var(--accent-2);
+}
+
+.tag-goalset {
+  color: var(--accent-text);
+  background: var(--accent);
+}
